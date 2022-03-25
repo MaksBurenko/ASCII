@@ -35,7 +35,7 @@ public class AsciiCharSequence implements CharSequence {
             String string = new String(b);
             return string;
         }else {
-            byte [] b = new byte [0];
+            byte [] b = {};
             String string = new String(b);
             return string;
         }
