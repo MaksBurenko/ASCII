@@ -1,13 +1,21 @@
 package ascii;
 
-import java.util.Arrays;
-
 public class AsciiCharSequence implements CharSequence {
 
     public static void main(String[] args) {
+        byte[] example = {72, 101, 108, 108, 111, 33};
+        AsciiCharSequence answer = new AsciiCharSequence(example);
+        System.out.println("Последовательность - " + answer.toString());//Hello!
+        System.out.println("Размер её - " + answer.length());//6
+        System.out.println("Символ под № 1 - " + answer.charAt(1));//e
+        System.out.println("Подпоследовательность - " + answer.subSequence(0, 5));//ello
+//проверка на нарушение инкапсуляции private поля
+        System.out.println(answer.toString());//Hello!
+        example[0] = 72;
+        System.out.println(answer.toString());//Hello!
     }
 
-    byte [] bytesArray;
+    byte [] bytesArray = {72, 101, 108, 108, 111, 33};
 
     public AsciiCharSequence (byte [] bytesArray) {
         this.bytesArray = bytesArray;
@@ -25,19 +33,16 @@ public class AsciiCharSequence implements CharSequence {
 
     @Override
     public CharSequence subSequence(int start, int end) {
-        if (start < end-1) {
-            byte [] b = new byte [end-1 - start];
-            for (int i =start; i < bytesArray.length; i++) {
-                if (i <= end - 1) {
-                    b[i] = bytesArray[i];
-                }
+        if (start >= 0 && end-1 > start) {
+            byte [] b = new byte [(end-1) - start];
+            for (int i = start; i <= end-1; i++) {
+                    for (int j = i; j<b.length; j++)
+                    b[j] = bytesArray[i];
             }
-            String string = new String(b);
-            return string;
+            return new CharSequence(b);
         }else {
             byte [] b = {};
-            String string = new String(b);
-            return string;
+            return new CharSequence(b);
         }
     }
 
