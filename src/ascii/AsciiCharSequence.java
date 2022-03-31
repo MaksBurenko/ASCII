@@ -33,16 +33,18 @@ public class AsciiCharSequence implements CharSequence {
 
     @Override
     public CharSequence subSequence(int start, int end) {
-        if (start >= 0 && end-1 > start) {
-            byte [] b = new byte [(end-1) - start];
-            for (int i = start; i <= end-1; i++) {
-                    for (int j = i; j<b.length; j++)
-                    b[j] = bytesArray[i];
+        if (start >= 0 && end > start) {
+            byte [] b = new byte [(end) - start];
+            System.arraycopy(bytesArray, start, b, 0, b.length);
+            for (int i=0; i < b.length; i++) {
+                System.out.print(b[i] + " ");
             }
-            return new CharSequence(b);
+            AsciiCharSequence cs = new AsciiCharSequence(b);
+            return cs;
         }else {
             byte [] b = {};
-            return new CharSequence(b);
+            AsciiCharSequence cs = new AsciiCharSequence(b);
+            return cs;
         }
     }
 
